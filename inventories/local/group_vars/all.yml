@@ -1,0 +1,8 @@
+# code: language=ansible
+# -*- mode: yaml -*-
+# vi: set ft=yaml :
+
+ht_cloudprovider: vagrant
+ht_environment_type: non-production
+ht_environment: local
+

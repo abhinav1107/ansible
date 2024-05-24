@@ -94,5 +94,8 @@ Temporary Items
 inventories/local/99-*
 
 # ignore all group vars file except inventories/local/group_vars/all.yml
-inventories/local/group_vars/*
+
+# ignore all dynamic inventory files
+inventories/*
+!inventories/local/01-static
 !inventories/local/group_vars/all.yml

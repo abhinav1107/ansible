@@ -3,6 +3,7 @@
 from ansible.errors import AnsibleParserError, AnsibleError
 from ansible.plugins.inventory import BaseInventoryPlugin
 import sys
+import subprocess
 
 if sys.version_info < (3, 11):
     raise AnsibleParserError("This inventory plugin requires Python version 3.11 or higher.")
@@ -20,15 +21,15 @@ DOCUMENTATION = r'''
         vagrant_paths:
             description: "Full path of folder where Vagrantfile is"
             type: list
-            required: True
-        parse_vagrant_private_ip:
+            elements: dict
+            default: []
+        parse_host_only_ip:
             description:
               - use this to find host only ip of vms from Vagrantfile
               - use this only if each vm has individual block definition for creation, other wise the parsing will fail
               - defaults to false
             type: bool
             default: False
-            required: False
     requirements:
         - python >= 3.11
 '''
@@ -36,14 +37,14 @@ DOCUMENTATION = r'''
 EXAMPLES = r'''
 plugin: vagrant
 vagrant_paths:
-  - path: /home/abhinav/workrelated/vagrant/k8s-cluster-demo    # REQUIRED
-    group_name: kubernetes                                      # OPTIONAL
-    additional_vars:                                            # OPTIONAL
+  - path: /home/abhinav/workrelated/vagrant/k8s-cluster-demo
+    group_name: kubernetes
+    additional_vars:
       - key: some_key_name
         val: some_key_val
       - key: some_other_key_name
         val: some_other_val_and_so_on
-parse_vagrant_file: False                                       # OPTIONAL
+parse_host_only_ip: False
 '''
 
 

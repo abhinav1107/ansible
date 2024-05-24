@@ -90,12 +90,8 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
-# ignore any inventory file that starts with `99-` under inventories/local directory
-inventories/local/99-*
-
-# ignore all group vars file except inventories/local/group_vars/all.yml
-
 # ignore all dynamic inventory files
 inventories/*
 !inventories/local/01-static
+# ignore all group vars file except inventories/local/group_vars/all.yml
 !inventories/local/group_vars/all.yml

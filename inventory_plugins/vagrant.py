@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+# pylint: disable-next=line-too-long
 from __future__ import absolute_import, division, print_function
 __metaclass__ = type
 
@@ -293,8 +294,7 @@ class InventoryModule(BaseInventoryPlugin, Constructable, Cacheable):
 
     def parse(self, inventory, loader, path, cache=True):
         super(InventoryModule, self).parse(inventory, loader, path)
-        config_data = {}
-        config_data = self._read_config_data(path)
+        self._read_config_data(path)
 
         # Cache logic: copied pasted from gcp_compute.py plugin
         # - https://github.com/ansible-collections/google.cloud/blob/master/plugins/inventory/gcp_compute.py

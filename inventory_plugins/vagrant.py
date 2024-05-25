@@ -80,7 +80,7 @@ class InventoryModule(BaseInventoryPlugin, Constructable, Cacheable):
     def _run_vagrant_command(self, arguments=None, folder=None):
         """Runs 'vagrant ssh-config' command in a folder and returns a dictionary data for processing"""
         if arguments and not folder:
-            raise AnsibleParserError("You must specify a folder to run vagrant ssh-config")
+            raise AnsibleError("You must specify a folder to run vagrant ssh-config")
 
         if not folder:
             folder = "/tmp"
@@ -96,7 +96,7 @@ class InventoryModule(BaseInventoryPlugin, Constructable, Cacheable):
             output = result.stdout.decode('utf-8')
         except subprocess.CalledProcessError as e:
             if arguments != "ssh-config":
-                raise AnsibleParserError("Running vagrant command failed: {}".format(e))
+                raise AnsibleError("Running vagrant command failed: {}".format(e))
             else:
                 self.display.warning("Running 'vagrant ssh-config' failed at path: {}. SKIPPED".format(folder))
 
@@ -299,6 +299,7 @@ class InventoryModule(BaseInventoryPlugin, Constructable, Cacheable):
         # Cache logic: copied pasted from gcp_compute.py plugin
         # - https://github.com/ansible-collections/google.cloud/blob/master/plugins/inventory/gcp_compute.py
         # I didn't care enough to understand it, but it works as is.
+        vagrant_data = None
         if cache:
             cache = self.get_option("cache")
             cache_key = self.get_cache_key(path)

@@ -1,6 +1,7 @@
 ---
 - hosts: vagrant
   gather_facts: false
+  become: true
 
   tasks:
     - name: ensure beginning placeholder

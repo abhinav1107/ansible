@@ -5,13 +5,13 @@
   tasks:
     - name: ensure beginning placeholder
       lineinfile:
-        path: /tmp/hosts
+        path: /etc/hosts
         line: '### host automation update placeholder - start'
         insertafter: EOF
 
     - name: ensure end placeholder
       lineinfile:
-        path: /tmp/hosts
+        path: /etc/hosts
         line: '### host automation update placeholder - end'
         insertafter: '### host automation update placeholder - start'
 

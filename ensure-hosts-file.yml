@@ -18,9 +18,9 @@
 
     - name: ensure each vm from vagrant is present in all vms hosts file
       lineinfile:
-        path: /tmp/hosts
+        path: /etc/hosts
         regexp: '^{{item}}(.*){{hostvars[item]["ht_name"]}}.abhinav.local(.*){{hostvars[item]["ht_name"]}}(.*)'
         line: '{{item}} {{hostvars[item]["ht_name"]}}.abhinav.local {{hostvars[item]["ht_name"]}}'
         insertbefore: '### host automation update placeholder - end'
-      when: item != inventory_hostname or hostvars[item]['ht_name'] != item
+      when: item != inventory_hostname and hostvars[item]['ht_name'] != item
       loop: "{{groups['vagrant']}}"
